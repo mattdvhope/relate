@@ -5,17 +5,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    visits = line_person.visits
-    line_person.update(visits: visits + 1)
-    render json: {:user => line_person, :code=>200, :message=>"Successful update of user!!"}
+    # visits = line_person.visits
+    # line_person.update(visits: visits + 1)
+
+    # FIX THIS LATER TO RECORD EVERY VISIT!!!!
+    render json: {:user => fb_person, :code=>200, :message=>"Glad to have another visit!!"}
   end
 
   private
 
     def person_in_system?
-      # fb_person ? update : set_up_user
-      
-
+      fb_person ? update : set_up_user
     end
 
     def fb_person
