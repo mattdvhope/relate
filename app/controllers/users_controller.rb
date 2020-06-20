@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     end
 
     def set_up_user
-      user = User.new(name: params[:name], picture: params[:picture])
+      user = User.new(name: params[:name], picture: params[:picture], fb_id: params[:fb_id])
       if user.save
         render json: {:user => user, :code=>200, :message=>"Successful creation of new user!!"}
       else
