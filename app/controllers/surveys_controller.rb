@@ -1,27 +1,36 @@
 class SurveysController < ApplicationController
 
   def create
-    survey = Survey.new(title: params["survey_title"])
-    survey.save
+    survey = Survey.find_by_contentful_id(params["contentful_id"])
+    unless survey
+      survey = Survey.new(title: params["survey_title"])
+      survey.save
+    end
 
     fb_id = params["fb_id"]
     user = User.find_by_fb_id(fb_id)
+
+    # user = User.create(name: "Fred", picture: "url3", fb_id: "333")
 
     us = UserSurvey.new
     us.survey = survey
     us.user = user
     us.save
     
-    questions = []
     params["questions"].each do |question|
-      questions.push(question)
+      q = Question.new(title: question["question"])
+      if question["selected"]
+        choice = Choice.create(title: question["selected"])
+        q.choices << choice
+      end
+      q.save
+      user.questions.push(q)
     end
-binding.pry
 
     # if user.save
       render json: 
       {
-        :questions => questions,
+        :survey => survey,
         :user => user,
         :code=>200, 
         :message=>"Successful!!"
