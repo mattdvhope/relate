@@ -7,8 +7,6 @@ Rails.application.routes.draw do
   
   resources :surveys, only: [:create]
 
-  resources :questions, only: [:create]
-
   post "/graphql", to: "graphql#execute"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
