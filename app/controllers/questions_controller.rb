@@ -4,16 +4,20 @@ class QuestionsController < ApplicationController
 
     # must bring in Question to have a valid Choice 
 
-    array = []
-    params["selected"].each {|sel| array.push(sel["choice"])  }
 
-    params["selected"].each do |sel|
-      Choice.create()
+    questions = []
+    params["questions"].each do |question|
+      questions.push(question)
+# binding.pry
     end
+
+    # params["selected"].each do |sel|
+    #   Choice.create()
+    # end
 
     render json: 
       {
-        :selections => array,
+        :selections => questions,
         :code=>200, 
         :message=>"Successful!!"
       }
