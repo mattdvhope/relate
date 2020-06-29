@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create, :update]
   
+  resources :surveys, only: [:create]
+
   resources :questions, only: [:create]
 
   post "/graphql", to: "graphql#execute"

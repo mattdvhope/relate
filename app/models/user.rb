@@ -1,3 +1,4 @@
 class User < ApplicationRecord
-  has_and_belongs_to_many :surveys
+  has_many :user_surveys, dependent: :destroy
+  has_many :surveys, :through => :user_surveys
 end

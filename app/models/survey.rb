@@ -1,4 +1,5 @@
 class Survey < ApplicationRecord
-  has_and_belongs_to_many :users
-  has_many :questions
+  has_many :user_surveys, dependent: :destroy
+  has_many :users, :through => :user_surveys
+  has_many :questions, dependent: :destroy
 end
