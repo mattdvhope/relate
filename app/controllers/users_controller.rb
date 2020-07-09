@@ -9,21 +9,25 @@ class UsersController < ApplicationController
     # line_person.update(visits: visits + 1)
 
     # FIX THIS LATER TO RECORD EVERY VISIT!!!!
-    render json: {:user => fb_person, :code=>200, :message=>"Glad to have another visit!!"}
+    render json: {:user => fb_person || line_person, :code=>200, :message=>"Glad to have another visit!!"}
   end
 
   private
 
     def person_in_system?
-      fb_person ? update : set_up_user
+      fb_person || line_person ? update : set_up_user
     end
 
     def fb_person
       User.find_by_fb_id(params[:fb_id])
     end
 
+    def line_person
+      User.find_by_line_id(params[:line_id])
+    end
+
     def set_up_user
-      user = User.new(name: params[:name], picture: params[:picture], fb_id: params[:fb_id])
+      user = User.new(name: params[:name], picture: params[:picture], fb_id: params[:fb_id], line_id: params[:line_id])
       if user.save
         render json: {:user => user, :code=>200, :message=>"Successful creation of new user!!"}
       else
