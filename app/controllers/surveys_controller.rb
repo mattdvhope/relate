@@ -12,8 +12,6 @@ class SurveysController < ApplicationController
 
     user = User.find_by_fb_id(fb_id) || User.find_by_line_id(line_id) 
 
-binding.pry
-
     us = UserSurvey.new
     us.survey = survey
     us.user = user
