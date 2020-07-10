@@ -19,11 +19,11 @@ class UsersController < ApplicationController
     end
 
     def fb_person
-      User.find_by_fb_id(params[:fb_id])
+      params[:fb_id] ? User.find_by_fb_id(params[:fb_id]) : nil
     end
 
     def line_person
-      User.find_by_line_id(params[:line_id])
+      params[:line_id] ? User.find_by_line_id(params[:line_id]) : nil
     end
 
     def set_up_user
