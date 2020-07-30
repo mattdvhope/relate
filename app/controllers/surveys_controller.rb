@@ -7,10 +7,11 @@ class SurveysController < ApplicationController
       survey.save
     end
 
-    fb_id   = params["fb_id"]
-    line_id = params["line_id"]
-
-    user = User.find_by_fb_id(fb_id) || User.find_by_line_id(line_id) 
+    if params["fb_id"]
+      user = User.find_by_fb_id(params["fb_id"])
+    else
+      user = User.find_by_line_id(params["line_id"])
+    end
 
     us = UserSurvey.new
     us.survey = survey
@@ -32,10 +33,6 @@ class SurveysController < ApplicationController
       {
         :survey => survey,
         :user => user,
-        :fb_id   => params["fb_id"],
-        :line_id => params["line_id"],
-        :find_by_fb_id => User.find_by_fb_id(fb_id),
-        :find_by_line_id => User.find_by_line_id(line_id),
         :code=>200, 
         :message=>"Successful!!"
       }
