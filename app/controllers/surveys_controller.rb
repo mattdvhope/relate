@@ -32,6 +32,10 @@ class SurveysController < ApplicationController
       {
         :survey => survey,
         :user => user,
+        :fb_id   => params["fb_id"],
+        :line_id => params["line_id"],
+        :find_by_fb_id => User.find_by_fb_id(fb_id),
+        :find_by_line_id => User.find_by_line_id(line_id),
         :code=>200, 
         :message=>"Successful!!"
       }
