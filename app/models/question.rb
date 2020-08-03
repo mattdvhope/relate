@@ -1,4 +1,4 @@
 class Question < ApplicationRecord
-  belongs_to :choice_response, polymorphic: true, optional: true
+  belongs_to :anon_survey
   has_many :choices, dependent: :destroy
 end

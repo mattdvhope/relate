@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   # global options responder -> makes sure OPTION request for CORS endpoints work
   match '*path', via: [:options], to: lambda {|_| [204, { 'Content-Type' => 'text/plain' }]}
 
-  resources :users, only: [:create, :update]
-  
   resources :surveys, only: [:create]
 
   post "/graphql", to: "graphql#execute"
