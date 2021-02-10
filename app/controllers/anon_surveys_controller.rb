@@ -23,8 +23,7 @@ class AnonSurveysController < ApplicationController
         render json: nil, status: :ok
       end
     end
-
-  end
+  end # create
 
   private
 
